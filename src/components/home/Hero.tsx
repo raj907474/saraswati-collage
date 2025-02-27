@@ -53,14 +53,12 @@ const Hero: React.FC = () => {
               Explore Courses
               <ArrowRight size={18} />
             </Link>
-            <a
-              href="https://forms.google.com/apply"
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              to="/apply"
               className="bg-saraswati-600 hover:bg-saraswati-700 text-white px-6 py-3 rounded-md font-medium transition-all duration-300 shadow-md hover:shadow-lg"
             >
               Apply Now
-            </a>
+            </Link>
           </div>
         </div>
       </div>

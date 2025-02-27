@@ -10,7 +10,7 @@ const navLinks = [
   { name: 'Faculties', path: '/faculties' },
   { name: 'Management', path: '/management' },
   { name: 'Contact', path: '/contact' },
-  { name: 'Apply', path: 'https://forms.google.com/apply', external: true }
+  { name: 'Apply', path: '/apply' }
 ];
 
 const Navbar: React.FC = () => {
@@ -50,37 +50,20 @@ const Navbar: React.FC = () => {
               const isActive = location.pathname === link.path;
               const isApply = link.name === 'Apply';
               
-              if (link.external) {
-                return (
-                  <li key={index}>
-                    <a
-                      href={link.path}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className={`relative px-4 py-2 rounded-md font-medium transition-all duration-300 ${
-                        isApply
-                          ? 'bg-saraswati-600 text-white hover:bg-saraswati-700 ml-2'
-                          : 'hover:text-saraswati-700'
-                      }`}
-                    >
-                      {link.name}
-                    </a>
-                  </li>
-                );
-              }
-              
               return (
                 <li key={index}>
                   <Link
                     to={link.path}
                     className={`relative px-4 py-2 rounded-md font-medium transition-all duration-300 ${
-                      isActive
-                        ? 'text-saraswati-700'
-                        : 'text-foreground/80 hover:text-saraswati-700'
+                      isApply
+                        ? 'bg-saraswati-600 text-white hover:bg-saraswati-700 ml-2'
+                        : isActive 
+                          ? 'text-saraswati-700'
+                          : 'text-foreground/80 hover:text-saraswati-700'
                     }`}
                   >
                     {link.name}
-                    {isActive && (
+                    {isActive && !isApply && (
                       <span className="absolute bottom-0 left-0 w-full h-0.5 bg-saraswati-500 rounded-full" />
                     )}
                   </Link>
@@ -116,33 +99,16 @@ const Navbar: React.FC = () => {
                 const isActive = location.pathname === link.path;
                 const isApply = link.name === 'Apply';
                 
-                if (link.external) {
-                  return (
-                    <li key={index}>
-                      <a
-                        href={link.path}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className={`block px-4 py-3 text-xl font-medium rounded-md transition-all ${
-                          isApply
-                            ? 'bg-saraswati-600 text-white text-center my-4'
-                            : 'hover:bg-saraswati-50'
-                        }`}
-                      >
-                        {link.name}
-                      </a>
-                    </li>
-                  );
-                }
-                
                 return (
                   <li key={index}>
                     <Link
                       to={link.path}
                       className={`block px-4 py-3 text-xl font-medium rounded-md transition-all ${
-                        isActive
-                          ? 'text-saraswati-700 bg-saraswati-50'
-                          : 'hover:bg-saraswati-50'
+                        isApply
+                          ? 'bg-saraswati-600 text-white text-center my-4'
+                          : isActive 
+                            ? 'text-saraswati-700 bg-saraswati-50'
+                            : 'hover:bg-saraswati-50'
                       }`}
                     >
                       {link.name}
