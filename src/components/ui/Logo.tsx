@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 interface LogoProps {
@@ -15,6 +15,15 @@ const Logo: React.FC<LogoProps> = ({
   variant = "full",
   isScrolled = false
 }) => {
+  const [logoLoaded, setLogoLoaded] = useState(false);
+  
+  useEffect(() => {
+    // Preload the logo image
+    const img = new Image();
+    img.src = "/lovable-uploads/3c77743a-8d64-4686-a86d-968f9e400da4.png";
+    img.onload = () => setLogoLoaded(true);
+  }, []);
+  
   const sizeClasses = {
     sm: 'h-8',
     md: 'h-10',
@@ -28,7 +37,9 @@ const Logo: React.FC<LogoProps> = ({
           <img 
             src="/lovable-uploads/3c77743a-8d64-4686-a86d-968f9e400da4.png" 
             alt="Saraswati College Logo" 
-            className={`${sizeClasses[size]} transition-all duration-300`}
+            className={`${sizeClasses[size]} transition-all duration-300 ${logoLoaded ? 'opacity-100' : 'opacity-0'}`}
+            loading="eager"
+            fetchpriority="high"
           />
         </div>
       );
@@ -39,7 +50,9 @@ const Logo: React.FC<LogoProps> = ({
         <img 
           src="/lovable-uploads/3c77743a-8d64-4686-a86d-968f9e400da4.png" 
           alt="Saraswati College Logo" 
-          className={`${sizeClasses[size]} transition-all duration-300`}
+          className={`${sizeClasses[size]} transition-all duration-300 ${logoLoaded ? 'opacity-100' : 'opacity-0'}`}
+          loading="eager"
+          fetchpriority="high"
         />
         <div className={`transition-all duration-300 ${isScrolled ? 'scale-95 origin-left' : ''}`}>
           <h1 className={`font-heading text-saraswati-950 ${size === 'sm' ? 'text-lg' : size === 'md' ? 'text-xl' : 'text-2xl'} font-bold leading-tight`}>

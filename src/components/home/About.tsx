@@ -58,53 +58,27 @@ const About: React.FC = () => {
           </p>
         </div>
         
-        <div className="grid md:grid-cols-2 gap-12 items-center">
-          <div className={`space-y-6 transition-all duration-500 delay-300 ease-out transform ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'}`}>
-            <p className="text-foreground leading-relaxed">
-              Saraswati College, established in 2000, is one of the most prestigious education institutions in Saurashtra. 
-              We play a vital role in transforming students into industry-ready professionals through 
-              our innovative teaching methods and practical approach to education.
-            </p>
-            
-            <p className="text-foreground leading-relaxed">
-              We encourage different approaches to teaching and learning that are both innovative and relevant 
-              to an increasingly global academic environment. Our commitment to cultural diversity creates an 
-              institutional environment where all students and staff share an appreciation of diverse outlooks, 
-              values, and understanding.
-            </p>
-            
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-6">
-              {keyFeatures.map((feature, index) => (
-                <div key={index} className="flex items-start gap-2">
-                  <CheckCircle className="text-saraswati-600 h-5 w-5 mt-0.5 flex-shrink-0" />
-                  <span className="text-sm text-foreground">{feature}</span>
-                </div>
-              ))}
-            </div>
-          </div>
+        <div className={`space-y-6 transition-all duration-500 delay-300 ease-out transform max-w-3xl mx-auto ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+          <p className="text-foreground leading-relaxed">
+            Saraswati College, established in 2000, is one of the most prestigious education institutions in Saurashtra. 
+            We play a vital role in transforming students into industry-ready professionals through 
+            our innovative teaching methods and practical approach to education.
+          </p>
           
-          <div className={`transition-all duration-500 delay-400 ease-out transform ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'}`}>
-            <div className="relative">
-              <div className="absolute -left-4 -top-4 w-20 h-20 bg-saraswati-100 rounded-full"></div>
-              <div className="absolute -right-4 -bottom-4 w-32 h-32 bg-saraswati-100 rounded-full"></div>
-              
-              <div className="relative z-10 rounded-lg overflow-hidden shadow-elevated">
-                <img 
-                  src="/lovable-uploads/ef33b335-576c-40cb-9678-bdc35f4816dd.png" 
-                  alt="Saraswati College Campus" 
-                  className="w-full h-auto object-cover aspect-[4/3]"
-                />
+          <p className="text-foreground leading-relaxed">
+            We encourage different approaches to teaching and learning that are both innovative and relevant 
+            to an increasingly global academic environment. Our commitment to cultural diversity creates an 
+            institutional environment where all students and staff share an appreciation of diverse outlooks, 
+            values, and understanding.
+          </p>
+          
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-6">
+            {keyFeatures.map((feature, index) => (
+              <div key={index} className="flex items-start gap-2">
+                <CheckCircle className="text-saraswati-600 h-5 w-5 mt-0.5 flex-shrink-0" />
+                <span className="text-sm text-foreground">{feature}</span>
               </div>
-              
-              <div className="absolute z-20 -right-5 -bottom-5 bg-white/95 backdrop-blur-sm shadow-subtle rounded-lg p-5 max-w-xs">
-                <div className="flex flex-col space-y-1">
-                  <span className="text-saraswati-700 font-semibold">Excellence in Education</span>
-                  <p className="text-sm text-muted-foreground">
-                    Our mission is to provide quality, sustained essential education to students from diverse backgrounds.
-                  </p>
-                </div>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </div>

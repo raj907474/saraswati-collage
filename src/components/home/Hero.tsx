@@ -5,24 +5,32 @@ import { Link } from 'react-router-dom';
 
 const Hero: React.FC = () => {
   const [loaded, setLoaded] = useState(false);
+  const [imageLoaded, setImageLoaded] = useState(false);
   
   useEffect(() => {
     const timer = setTimeout(() => {
       setLoaded(true);
     }, 100);
     
+    // Preload the hero image
+    const img = new Image();
+    img.src = "/lovable-uploads/ef33b335-576c-40cb-9678-bdc35f4816dd.png";
+    img.onload = () => setImageLoaded(true);
+    
     return () => clearTimeout(timer);
   }, []);
 
   return (
-    <div className="relative min-h-screen flex items-center">
+    <div className="relative min-h-screen flex items-center overflow-hidden">
       {/* Background Image with Overlay */}
       <div className="absolute inset-0 z-0">
         <div className={`absolute inset-0 bg-black/40 z-10 transition-opacity duration-1000 ${loaded ? 'opacity-40' : 'opacity-0'}`}></div>
         <img
           src="/lovable-uploads/ef33b335-576c-40cb-9678-bdc35f4816dd.png"
           alt="Saraswati College Campus"
-          className={`object-cover w-full h-full transition-all duration-1000 blur-in ${loaded ? 'loaded scale-105' : 'scale-100'}`}
+          className={`object-cover w-full h-full transition-all duration-1000 blur-in ${imageLoaded ? 'loaded scale-105' : 'scale-100'}`}
+          loading="eager"
+          fetchpriority="high"
         />
       </div>
       
