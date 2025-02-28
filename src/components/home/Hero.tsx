@@ -30,7 +30,7 @@ const Hero: React.FC = () => {
           alt="Saraswati College Campus"
           className={`object-cover w-full h-full transition-all duration-1000 blur-in ${imageLoaded ? 'loaded scale-105' : 'scale-100'}`}
           loading="eager"
-          fetchpriority="high"
+          fetchPriority="high"
         />
       </div>
       

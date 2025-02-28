@@ -39,7 +39,7 @@ const Logo: React.FC<LogoProps> = ({
             alt="Saraswati College Logo" 
             className={`${sizeClasses[size]} transition-all duration-300 ${logoLoaded ? 'opacity-100' : 'opacity-0'}`}
             loading="eager"
-            fetchpriority="high"
+            fetchPriority="high"
           />
         </div>
       );
@@ -52,7 +52,7 @@ const Logo: React.FC<LogoProps> = ({
           alt="Saraswati College Logo" 
           className={`${sizeClasses[size]} transition-all duration-300 ${logoLoaded ? 'opacity-100' : 'opacity-0'}`}
           loading="eager"
-          fetchpriority="high"
+          fetchPriority="high"
         />
         <div className={`transition-all duration-300 ${isScrolled ? 'scale-95 origin-left' : ''}`}>
           <h1 className={`font-heading text-saraswati-950 ${size === 'sm' ? 'text-lg' : size === 'md' ? 'text-xl' : 'text-2xl'} font-bold leading-tight`}>
