@@ -1,12 +1,16 @@
+
 import React, { useEffect, useState } from 'react';
 import Navbar from '../components/layout/Navbar';
 import Footer from '../components/layout/Footer';
-import { ArrowRight, CheckCircle, FileText, GraduationCap, Send } from 'lucide-react';
+import { ArrowRight, Send } from 'lucide-react';
 import { useToast } from "@/components/ui/use-toast";
 import emailjs from '@emailjs/browser';
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from '@/components/ui/alert-dialog';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Label } from "@/components/ui/label";
+import { Button } from "@/components/ui/button";
 
 const Apply = () => {
   useEffect(() => {
@@ -16,17 +20,31 @@ const Apply = () => {
 
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
+  
+  // Generate year options for the dropdown (last 10 years)
+  const currentYear = new Date().getFullYear();
+  const years = Array.from({ length: 10 }, (_, i) => currentYear - i);
+  
   const [formState, setFormState] = useState({
     name: '',
-    email: '',
-    phone: '',
-    course: '',
-    qualification: '',
+    sex: 'male',
+    caste: 'OPEN',
+    studentMobile: '',
+    parentsMobile: '',
+    course: 'BCA',
+    address: '',
+    schoolName: '',
+    stream: 'Science',
+    passingYear: currentYear.toString(),
     message: ''
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
+    setFormState(prev => ({ ...prev, [name]: value }));
+  };
+  
+  const handleRadioChange = (name: string, value: string) => {
     setFormState(prev => ({ ...prev, [name]: value }));
   };
 
@@ -40,12 +58,17 @@ const Apply = () => {
         'YOUR_SERVICE_ID', // e.g., 'service_abc123'
         'YOUR_TEMPLATE_ID', // e.g., 'template_xyz456'
         {
-          from_name: formState.name,
-          email: formState.email,
-          phone: formState.phone,
+          student_name: formState.name,
+          sex: formState.sex,
+          caste: formState.caste,
+          student_mobile: formState.studentMobile,
+          parents_mobile: formState.parentsMobile,
           course: formState.course,
-          qualification: formState.qualification,
-          message: formState.message,
+          address: formState.address,
+          school_name: formState.schoolName,
+          stream: formState.stream,
+          passing_year: formState.passingYear,
+          additional_message: formState.message,
         },
         'YOUR_PUBLIC_KEY' // e.g., 'ABC123DEF456GHI789'
       );
@@ -60,10 +83,15 @@ const Apply = () => {
         // Reset form after successful submission
         setFormState({
           name: '',
-          email: '',
-          phone: '',
-          course: '',
-          qualification: '',
+          sex: 'male',
+          caste: 'OPEN',
+          studentMobile: '',
+          parentsMobile: '',
+          course: 'BCA',
+          address: '',
+          schoolName: '',
+          stream: 'Science',
+          passingYear: currentYear.toString(),
           message: ''
         });
       }
@@ -79,22 +107,17 @@ const Apply = () => {
     }
   };
 
-  // Old redirect to Google Form (keeping as reference)
-  const handleApplyNow = () => {
-    window.open('https://forms.google.com/apply', '_blank');
-  };
-
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
       
       <main className="pt-24 pb-16">
-        <div className="container-tight">
-          <div className="text-center mb-16 animate-fade-up">
+        <div className="container-tight px-4 sm:px-6">
+          <div className="text-center mb-12 animate-fade-up">
             <span className="inline-block bg-saraswati-100 text-saraswati-800 px-4 py-1 rounded-full text-sm font-medium mb-4">
               Admissions Open
             </span>
-            <h1 className="font-heading text-4xl md:text-5xl font-bold mb-4">
+            <h1 className="font-heading text-3xl md:text-5xl font-bold mb-4">
               Apply to <span className="text-saraswati-700">Saraswati College</span>
             </h1>
             <p className="text-muted-foreground max-w-2xl mx-auto">
@@ -102,263 +125,236 @@ const Apply = () => {
             </p>
           </div>
           
-          <div className="grid md:grid-cols-2 gap-8 mb-12">
-            <div className="bg-white rounded-xl shadow-subtle border border-saraswati-100 overflow-hidden">
-              <div className="p-6">
-                <h2 className="font-heading text-2xl font-bold mb-4">Admission Process</h2>
-                <div className="space-y-4">
-                  <div className="flex gap-3">
-                    <div className="flex-shrink-0 mt-1">
-                      <span className="flex items-center justify-center w-6 h-6 rounded-full bg-saraswati-100 text-saraswati-700 font-medium">1</span>
-                    </div>
-                    <div>
-                      <h3 className="font-medium text-lg">Complete Online Application</h3>
-                      <p className="text-muted-foreground text-sm">Fill out our comprehensive online application form with your personal and academic details.</p>
-                    </div>
-                  </div>
-                  
-                  <div className="flex gap-3">
-                    <div className="flex-shrink-0 mt-1">
-                      <span className="flex items-center justify-center w-6 h-6 rounded-full bg-saraswati-100 text-saraswati-700 font-medium">2</span>
-                    </div>
-                    <div>
-                      <h3 className="font-medium text-lg">Submit Required Documents</h3>
-                      <p className="text-muted-foreground text-sm">Upload necessary documents including academic transcripts, ID proof, and photograph.</p>
-                    </div>
-                  </div>
-                  
-                  <div className="flex gap-3">
-                    <div className="flex-shrink-0 mt-1">
-                      <span className="flex items-center justify-center w-6 h-6 rounded-full bg-saraswati-100 text-saraswati-700 font-medium">3</span>
-                    </div>
-                    <div>
-                      <h3 className="font-medium text-lg">Admission Interview</h3>
-                      <p className="text-muted-foreground text-sm">Shortlisted candidates will be called for an interview with our faculty panel.</p>
-                    </div>
-                  </div>
-                  
-                  <div className="flex gap-3">
-                    <div className="flex-shrink-0 mt-1">
-                      <span className="flex items-center justify-center w-6 h-6 rounded-full bg-saraswati-100 text-saraswati-700 font-medium">4</span>
-                    </div>
-                    <div>
-                      <h3 className="font-medium text-lg">Fee Payment & Enrollment</h3>
-                      <p className="text-muted-foreground text-sm">Upon selection, complete the admission process by paying the required fees and enrolling in your chosen program.</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+          <div className="bg-white rounded-xl p-6 md:p-8 shadow-subtle border border-saraswati-100 mb-12">
+            <h2 className="font-heading text-2xl font-bold mb-6 text-center md:text-left">Application Form</h2>
             
-            <div className="bg-white rounded-xl shadow-subtle border border-saraswati-100 overflow-hidden">
-              <div className="p-6">
-                <h2 className="font-heading text-2xl font-bold mb-4">Required Documents</h2>
-                <ul className="space-y-3">
-                  <li className="flex items-start gap-3">
-                    <CheckCircle className="w-5 h-5 text-saraswati-600 flex-shrink-0 mt-1" />
-                    <span>Completed application form</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <CheckCircle className="w-5 h-5 text-saraswati-600 flex-shrink-0 mt-1" />
-                    <span>10th Standard mark sheet and certificate</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <CheckCircle className="w-5 h-5 text-saraswati-600 flex-shrink-0 mt-1" />
-                    <span>12th Standard mark sheet and certificate</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <CheckCircle className="w-5 h-5 text-saraswati-600 flex-shrink-0 mt-1" />
-                    <span>Transfer certificate from last attended institution</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <CheckCircle className="w-5 h-5 text-saraswati-600 flex-shrink-0 mt-1" />
-                    <span>Character certificate</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <CheckCircle className="w-5 h-5 text-saraswati-600 flex-shrink-0 mt-1" />
-                    <span>Migration certificate (if applicable)</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <CheckCircle className="w-5 h-5 text-saraswati-600 flex-shrink-0 mt-1" />
-                    <span>Passport size photographs (4 copies)</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <CheckCircle className="w-5 h-5 text-saraswati-600 flex-shrink-0 mt-1" />
-                    <span>ID proof (Aadhar Card/PAN Card/Passport)</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <CheckCircle className="w-5 h-5 text-saraswati-600 flex-shrink-0 mt-1" />
-                    <span>Caste certificate (if applicable)</span>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-          
-          <div className="bg-saraswati-50 rounded-xl p-8 shadow-subtle border border-saraswati-100 mb-12">
-            <div className="grid md:grid-cols-3 gap-6">
-              <div className="text-center p-4 bg-white rounded-lg shadow-subtle">
-                <div className="flex justify-center mb-3">
-                  <GraduationCap className="w-10 h-10 text-saraswati-600" />
-                </div>
-                <h3 className="font-medium">Scholarship Options</h3>
-                <p className="text-sm text-muted-foreground mt-2">Merit-based scholarships available for outstanding academic achievement.</p>
+            <form onSubmit={handleSubmit} className="space-y-6">
+              {/* Student Name */}
+              <div>
+                <Label htmlFor="name" className="text-base">Student Name</Label>
+                <Input
+                  id="name"
+                  name="name"
+                  value={formState.name}
+                  onChange={handleChange}
+                  required
+                  placeholder="Full Name"
+                  disabled={loading}
+                  className="mt-1"
+                />
               </div>
               
-              <div className="text-center p-4 bg-white rounded-lg shadow-subtle">
-                <div className="flex justify-center mb-3">
-                  <FileText className="w-10 h-10 text-saraswati-600" />
-                </div>
-                <h3 className="font-medium">Flexible Fee Structure</h3>
-                <p className="text-sm text-muted-foreground mt-2">Multiple payment options with installment facilities for all students.</p>
-              </div>
-              
-              <div className="text-center p-4 bg-white rounded-lg shadow-subtle">
-                <div className="flex justify-center mb-3">
-                  <CheckCircle className="w-10 h-10 text-saraswati-600" />
-                </div>
-                <h3 className="font-medium">Placement Assistance</h3>
-                <p className="text-sm text-muted-foreground mt-2">Comprehensive placement support through our dedicated cell.</p>
-              </div>
-            </div>
-          </div>
-          
-          <div className="text-center">
-            <p className="text-lg mb-6">Ready to take the next step? Apply now to secure your spot!</p>
-            <AlertDialog>
-              <AlertDialogTrigger asChild>
-                <button
-                  className="bg-saraswati-600 hover:bg-saraswati-700 text-white px-8 py-4 rounded-md font-medium text-lg flex items-center gap-2 mx-auto transition-all duration-300 shadow-md hover:shadow-lg"
+              {/* Sex Radio Buttons */}
+              <div>
+                <Label className="text-base mb-2 block">Sex</Label>
+                <RadioGroup 
+                  value={formState.sex} 
+                  onValueChange={(value) => handleRadioChange('sex', value)}
+                  className="flex flex-row space-x-4"
                 >
-                  Apply Now
-                  <ArrowRight size={20} />
-                </button>
-              </AlertDialogTrigger>
-              <AlertDialogContent className="max-w-3xl">
-                <AlertDialogHeader>
-                  <AlertDialogTitle className="text-2xl font-heading">Apply to Saraswati College</AlertDialogTitle>
-                  <AlertDialogDescription>
-                    Please fill in the form below to submit your application.
-                  </AlertDialogDescription>
-                </AlertDialogHeader>
-                
-                <form onSubmit={handleSubmit} className="py-4">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
-                    <div>
-                      <label htmlFor="name" className="block text-sm font-medium mb-1">
-                        Full Name
-                      </label>
-                      <Input
-                        id="name"
-                        name="name"
-                        value={formState.name}
-                        onChange={handleChange}
-                        required
-                        placeholder="John Doe"
-                        disabled={loading}
-                      />
-                    </div>
-                    
-                    <div>
-                      <label htmlFor="email" className="block text-sm font-medium mb-1">
-                        Email Address
-                      </label>
-                      <Input
-                        type="email"
-                        id="email"
-                        name="email"
-                        value={formState.email}
-                        onChange={handleChange}
-                        required
-                        placeholder="john@example.com"
-                        disabled={loading}
-                      />
-                    </div>
+                  <div className="flex items-center space-x-2">
+                    <RadioGroupItem value="male" id="male" />
+                    <Label htmlFor="male">Male</Label>
                   </div>
-                  
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
-                    <div>
-                      <label htmlFor="phone" className="block text-sm font-medium mb-1">
-                        Phone Number
-                      </label>
-                      <Input
-                        type="tel"
-                        id="phone"
-                        name="phone"
-                        value={formState.phone}
-                        onChange={handleChange}
-                        required
-                        placeholder="+91 9876543210"
-                        disabled={loading}
-                      />
-                    </div>
-                    
-                    <div>
-                      <label htmlFor="course" className="block text-sm font-medium mb-1">
-                        Course Interested In
-                      </label>
-                      <select
-                        id="course"
-                        name="course"
-                        value={formState.course}
-                        onChange={handleChange}
-                        required
-                        className="w-full px-3 py-2 border border-input bg-background rounded-md focus:ring-2 focus:ring-saraswati-500 focus:border-transparent text-sm"
-                        disabled={loading}
-                      >
-                        <option value="">Select a course</option>
-                        <option value="BCA">BCA - Bachelor of Computer Applications</option>
-                        <option value="BBA">BBA - Bachelor of Business Administration</option>
-                        <option value="B.Com">B.Com - Bachelor of Commerce</option>
-                        <option value="PGDCA">PGDCA - Post Graduate Diploma in Computer Applications</option>
-                        <option value="M.Com">M.Com - Master of Commerce</option>
-                      </select>
-                    </div>
+                  <div className="flex items-center space-x-2">
+                    <RadioGroupItem value="female" id="female" />
+                    <Label htmlFor="female">Female</Label>
                   </div>
-                  
-                  <div className="mb-4">
-                    <label htmlFor="qualification" className="block text-sm font-medium mb-1">
-                      Highest Qualification
-                    </label>
-                    <Input
-                      id="qualification"
-                      name="qualification"
-                      value={formState.qualification}
-                      onChange={handleChange}
-                      required
-                      placeholder="12th (Science/Commerce/Arts)"
-                      disabled={loading}
-                    />
+                </RadioGroup>
+              </div>
+              
+              {/* Caste Radio Buttons */}
+              <div>
+                <Label className="text-base mb-2 block">Caste</Label>
+                <RadioGroup 
+                  value={formState.caste} 
+                  onValueChange={(value) => handleRadioChange('caste', value)}
+                  className="flex flex-wrap gap-4"
+                >
+                  <div className="flex items-center space-x-2">
+                    <RadioGroupItem value="SC" id="sc" />
+                    <Label htmlFor="sc">SC</Label>
                   </div>
-                  
-                  <div className="mb-4">
-                    <label htmlFor="message" className="block text-sm font-medium mb-1">
-                      Additional Information
-                    </label>
-                    <Textarea
-                      id="message"
-                      name="message"
-                      value={formState.message}
-                      onChange={handleChange}
-                      rows={3}
-                      placeholder="Any additional information you'd like to share..."
-                      disabled={loading}
-                    />
+                  <div className="flex items-center space-x-2">
+                    <RadioGroupItem value="ST" id="st" />
+                    <Label htmlFor="st">ST</Label>
                   </div>
-                </form>
-                
-                <AlertDialogFooter>
-                  <AlertDialogCancel disabled={loading}>Cancel</AlertDialogCancel>
-                  <AlertDialogAction 
-                    onClick={handleSubmit}
+                  <div className="flex items-center space-x-2">
+                    <RadioGroupItem value="SEBC" id="sebc" />
+                    <Label htmlFor="sebc">SEBC</Label>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <RadioGroupItem value="OPEN" id="open" />
+                    <Label htmlFor="open">OPEN</Label>
+                  </div>
+                </RadioGroup>
+              </div>
+              
+              {/* Mobile Numbers - Two Column on larger screens */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <Label htmlFor="studentMobile" className="text-base">Student Mobile Number</Label>
+                  <Input
+                    type="tel"
+                    id="studentMobile"
+                    name="studentMobile"
+                    value={formState.studentMobile}
+                    onChange={handleChange}
+                    required
+                    placeholder="+91 9876543210"
                     disabled={loading}
-                    className="bg-saraswati-600 hover:bg-saraswati-700"
-                  >
-                    {loading ? 'Submitting...' : 'Submit Application'}
-                  </AlertDialogAction>
-                </AlertDialogFooter>
-              </AlertDialogContent>
-            </AlertDialog>
+                    className="mt-1"
+                  />
+                </div>
+                
+                <div>
+                  <Label htmlFor="parentsMobile" className="text-base">Parents Mobile Number</Label>
+                  <Input
+                    type="tel"
+                    id="parentsMobile"
+                    name="parentsMobile"
+                    value={formState.parentsMobile}
+                    onChange={handleChange}
+                    required
+                    placeholder="+91 9876543210"
+                    disabled={loading}
+                    className="mt-1"
+                  />
+                </div>
+              </div>
+              
+              {/* Course Radio Buttons */}
+              <div>
+                <Label className="text-base mb-2 block">Which course do you want to apply for?</Label>
+                <RadioGroup 
+                  value={formState.course} 
+                  onValueChange={(value) => handleRadioChange('course', value)}
+                  className="flex flex-wrap gap-4"
+                >
+                  <div className="flex items-center space-x-2">
+                    <RadioGroupItem value="BCA" id="bca" />
+                    <Label htmlFor="bca">BCA</Label>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <RadioGroupItem value="BSCIT" id="bscit" />
+                    <Label htmlFor="bscit">BSCIT</Label>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <RadioGroupItem value="BBA" id="bba" />
+                    <Label htmlFor="bba">BBA</Label>
+                  </div>
+                </RadioGroup>
+              </div>
+              
+              {/* Residence Address */}
+              <div>
+                <Label htmlFor="address" className="text-base">Residence Address</Label>
+                <Textarea
+                  id="address"
+                  name="address"
+                  value={formState.address}
+                  onChange={handleChange}
+                  required
+                  placeholder="Your complete residential address"
+                  disabled={loading}
+                  className="mt-1"
+                  rows={3}
+                />
+              </div>
+              
+              {/* School Name */}
+              <div>
+                <Label htmlFor="schoolName" className="text-base">Name of your last 12th Std school?</Label>
+                <Input
+                  id="schoolName"
+                  name="schoolName"
+                  value={formState.schoolName}
+                  onChange={handleChange}
+                  required
+                  placeholder="School Name"
+                  disabled={loading}
+                  className="mt-1"
+                />
+              </div>
+              
+              {/* Stream Radio Buttons */}
+              <div>
+                <Label className="text-base mb-2 block">Stream in 12th Standard?</Label>
+                <RadioGroup 
+                  value={formState.stream} 
+                  onValueChange={(value) => handleRadioChange('stream', value)}
+                  className="flex flex-wrap gap-4"
+                >
+                  <div className="flex items-center space-x-2">
+                    <RadioGroupItem value="Science" id="science" />
+                    <Label htmlFor="science">Science</Label>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <RadioGroupItem value="Commerce" id="commerce" />
+                    <Label htmlFor="commerce">Commerce</Label>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <RadioGroupItem value="Arts" id="arts" />
+                    <Label htmlFor="arts">Arts</Label>
+                  </div>
+                </RadioGroup>
+              </div>
+              
+              {/* Passing Year Dropdown */}
+              <div>
+                <Label htmlFor="passingYear" className="text-base">12th Standard Passing Year?</Label>
+                <select
+                  id="passingYear"
+                  name="passingYear"
+                  value={formState.passingYear}
+                  onChange={handleChange}
+                  required
+                  disabled={loading}
+                  className="mt-1 w-full rounded-md border border-input p-2 bg-background text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                >
+                  {years.map((year) => (
+                    <option key={year} value={year.toString()}>
+                      {year}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              
+              {/* Additional Message */}
+              <div>
+                <Label htmlFor="message" className="text-base">Any additional information</Label>
+                <Textarea
+                  id="message"
+                  name="message"
+                  value={formState.message}
+                  onChange={handleChange}
+                  placeholder="Any additional information you'd like to share..."
+                  disabled={loading}
+                  className="mt-1"
+                  rows={3}
+                />
+              </div>
+              
+              {/* Submit Button */}
+              <Button 
+                type="submit"
+                disabled={loading}
+                className="w-full bg-saraswati-600 hover:bg-saraswati-700 text-lg py-6"
+              >
+                {loading ? 'Submitting...' : 'Submit Application'}
+                <Send className="ml-2" />
+              </Button>
+            </form>
+          </div>
+          
+          <div className="bg-saraswati-50 rounded-xl p-6 md:p-8 shadow-subtle border border-saraswati-100 mb-8">
+            <h3 className="font-heading text-xl font-semibold mb-4">What Happens Next?</h3>
+            <ol className="space-y-3 list-decimal pl-5">
+              <li>Our admissions team will review your application</li>
+              <li>You'll receive a confirmation email with next steps</li>
+              <li>Bring your original documents for verification when requested</li>
+              <li>Complete the admission process by paying the required fees</li>
+            </ol>
           </div>
         </div>
       </main>
