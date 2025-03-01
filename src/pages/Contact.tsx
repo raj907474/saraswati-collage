@@ -1,9 +1,10 @@
+
 import React, { useEffect, useState } from 'react';
 import Navbar from '../components/layout/Navbar';
 import Footer from '../components/layout/Footer';
 import { Mail, Phone, MapPin, Send, Clock } from 'lucide-react';
 import emailjs from '@emailjs/browser';
-import { useToast } from "@/components/ui/use-toast";
+import { useToast } from "@/hooks/use-toast";
 
 const Contact = () => {
   useEffect(() => {
@@ -32,18 +33,25 @@ const Contact = () => {
     setLoading(true);
     
     try {
+      // Creating template parameters object matching the template variables
+      const templateParams = {
+        from_name: formState.name,
+        email: formState.email,
+        phone: formState.phone,
+        subject: formState.subject,
+        message: formState.message,
+      };
+      
+      console.log("Sending email with parameters:", templateParams);
+      
       const result = await emailjs.send(
         'service_4v2wu5n',
         'template_hz2hibj',
-        {
-          from_name: formState.name,
-          email: formState.email,
-          phone: formState.phone,
-          subject: formState.subject,
-          message: formState.message,
-        },
+        templateParams,
         '2_Z9XEdsrTvoVBPsu'
       );
+      
+      console.log("EmailJS response:", result);
       
       if (result.text === 'OK') {
         toast({
