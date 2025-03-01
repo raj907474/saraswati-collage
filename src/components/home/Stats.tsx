@@ -9,9 +9,9 @@ interface Stat {
 
 const stats: Stat[] = [
   { value: "20+", label: "Years of Academic Excellence", suffix: "+" },
-  { value: "5000", label: "Alumni Network", suffix: "+" },
-  { value: "50", label: "Expert Faculty Members", suffix: "+" },
-  { value: "95", label: "Placement Rate", suffix: "%" },
+  { value: "5000+", label: "Number of Students Studied", suffix: "+" },
+  { value: "15+", label: "Expert Faculty Members", suffix: "+" },
+
 ];
 
 const Stats: React.FC = () => {
@@ -74,7 +74,7 @@ const Stats: React.FC = () => {
       className="py-16 bg-saraswati-700 text-white"
     >
       <div className="container">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-3 md:grid-cols-3 gap-10">
           {stats.map((stat, index) => (
             <div
               key={index}

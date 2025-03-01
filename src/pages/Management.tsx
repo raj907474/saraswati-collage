@@ -103,7 +103,7 @@ const Management = () => {
           
           {/* Note about Google Sheets Integration */}
           <div className="mt-8 text-center text-sm text-muted-foreground">
-            <p>This is a placeholder page. In the actual implementation, management data will be fetched from Google Sheets.</p>
+            <p>.</p>
           </div>
         </div>
       </main>

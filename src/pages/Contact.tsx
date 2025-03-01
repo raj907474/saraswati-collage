@@ -154,7 +154,7 @@ const Contact = () => {
                   <div>
                     <h3 className="font-medium text-lg mb-1">Office Hours</h3>
                     <p className="text-muted-foreground mb-1">Monday - Saturday</p>
-                    <p className="text-muted-foreground">9:00 AM - 5:00 PM</p>
+                    <p className="text-muted-foreground">8:00 AM - 1:00 PM</p>
                   </div>
                 </div>
               </div>
@@ -265,7 +265,7 @@ const Contact = () => {
           <div className="mt-16">
             <div className="rounded-lg overflow-hidden h-96 shadow-card">
               <iframe 
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3696.845196333687!2d70.37968177458979!3d21.89751935779961!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39596e77dea8e20f%3A0x7f1a7bc9c2d95225!2sSaraswati%20College%20Of%20Computer%20Applications%2C%20BBA%20%26%20IT!5e0!3m2!1sen!2sin!4v1691565775566!5m2!1sen!2sin" 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d414.82685739182136!2d70.44824191152235!3d21.72827013555925!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39581e15f0871535%3A0xed2466c77bd5bb7c!2sShri%20Saraswati%20College%20Of%20Commerce!5e1!3m2!1sen!2sin!4v1740819226601!5m2!1sen!2sin"
                 width="100%" 
                 height="100%" 
                 style={{ border: 0 }} 

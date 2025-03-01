@@ -139,7 +139,7 @@ const Faculties = () => {
           
           {/* Note about Google Sheets Integration */}
           <div className="mt-16 text-center text-sm text-muted-foreground">
-            <p>This is a placeholder page. In the actual implementation, faculty data will be fetched from Google Sheets.</p>
+            <p>.</p>
           </div>
         </div>
       </main>

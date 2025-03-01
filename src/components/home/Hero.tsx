@@ -14,7 +14,7 @@ const Hero: React.FC = () => {
     
     // Preload the hero image
     const img = new Image();
-    img.src = "/lovable-uploads/ef33b335-576c-40cb-9678-bdc35f4816dd.png";
+    img.src = "/uploads/ef33b335-576c-40cb-9678-bdc35f4816dd.png";
     img.onload = () => setImageLoaded(true);
     
     return () => clearTimeout(timer);
@@ -26,7 +26,7 @@ const Hero: React.FC = () => {
       <div className="absolute inset-0 z-0">
         <div className={`absolute inset-0 bg-black/40 z-10 transition-opacity duration-1000 ${loaded ? 'opacity-40' : 'opacity-0'}`}></div>
         <img
-          src="/lovable-uploads/ef33b335-576c-40cb-9678-bdc35f4816dd.png"
+          src="uploads/ef33b335-576c-40cb-9678-bdc35f4816dd.png"
           alt="Saraswati College Campus"
           className={`object-cover w-full h-full transition-all duration-1000 blur-in ${imageLoaded ? 'loaded scale-105' : 'scale-100'}`}
           loading="eager"

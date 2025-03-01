@@ -20,7 +20,7 @@ const Logo: React.FC<LogoProps> = ({
   useEffect(() => {
     // Preload the logo image
     const img = new Image();
-    img.src = "/lovable-uploads/3c77743a-8d64-4686-a86d-968f9e400da4.png";
+    img.src = "/uploads/3c77743a-8d64-4686-a86d-968f9e400da4.png";
     img.onload = () => setLogoLoaded(true);
   }, []);
   
@@ -35,7 +35,7 @@ const Logo: React.FC<LogoProps> = ({
       return (
         <div className="flex items-center">
           <img 
-            src="/lovable-uploads/3c77743a-8d64-4686-a86d-968f9e400da4.png" 
+            src="/uploads/3c77743a-8d64-4686-a86d-968f9e400da4.png" 
             alt="Saraswati College Logo" 
             className={`${sizeClasses[size]} transition-all duration-300 ${logoLoaded ? 'opacity-100' : 'opacity-0'}`}
             loading="eager"
@@ -48,7 +48,7 @@ const Logo: React.FC<LogoProps> = ({
     return (
       <div className="flex items-center gap-2">
         <img 
-          src="/lovable-uploads/3c77743a-8d64-4686-a86d-968f9e400da4.png" 
+          src="/uploads/3c77743a-8d64-4686-a86d-968f9e400da4.png" 
           alt="Saraswati College Logo" 
           className={`${sizeClasses[size]} transition-all duration-300 ${logoLoaded ? 'opacity-100' : 'opacity-0'}`}
           loading="eager"

@@ -88,16 +88,10 @@ const Footer: React.FC = () => {
                 </Link>
               </li>
               <li>
-                <a 
-                  href="https://forms.google.com/apply" 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  className="text-muted-foreground hover:text-saraswati-700 transition-colors flex items-center"
-                >
+              <Link to="/apply" className="text-muted-foreground hover:text-saraswati-700 transition-colors flex items-center">
                   <span className="w-1.5 h-1.5 rounded-full bg-saraswati-400 mr-2"></span>
                   Apply for Admission
-                  <ExternalLink size={12} className="ml-1 inline-block" />
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -156,7 +150,7 @@ const Footer: React.FC = () => {
         </div>
         
         <div className="border-t border-saraswati-100 py-6 text-center text-sm text-muted-foreground">
-          <p>&copy; {new Date().getFullYear()} Saraswati College of Commerce, BBA & IT Dhoraji. All rights reserved.</p>
+          <p>&copy;2014 Saraswati College of Commerce, BBA & IT Dhoraji. All rights reserved.</p>
         </div>
       </div>
     </footer>
