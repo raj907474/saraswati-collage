@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import Navbar from '../components/layout/Navbar';
 import Footer from '../components/layout/Footer';
@@ -53,10 +52,9 @@ const Apply = () => {
     setLoading(true);
     
     try {
-      // Replace these values with your EmailJS service, template, and public key
       const result = await emailjs.send(
-        'YOUR_SERVICE_ID', // e.g., 'service_abc123'
-        'YOUR_TEMPLATE_ID', // e.g., 'template_xyz456'
+        'service_4v2wu5n',
+        'template_9k00jko',
         {
           student_name: formState.name,
           sex: formState.sex,
@@ -70,7 +68,7 @@ const Apply = () => {
           passing_year: formState.passingYear,
           additional_message: formState.message,
         },
-        'YOUR_PUBLIC_KEY' // e.g., 'ABC123DEF456GHI789'
+        '2_Z9XEdsrTvoVBPsu'
       );
       
       if (result.text === 'OK') {
