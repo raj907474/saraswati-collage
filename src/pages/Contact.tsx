@@ -46,7 +46,7 @@ const Contact = () => {
       
       const result = await emailjs.send(
         'service_4v2wu5n',
-        'template_hz2hibj',
+        'template_7yyta1l', // Updated the template ID here
         templateParams,
         '2_Z9XEdsrTvoVBPsu'
       );
